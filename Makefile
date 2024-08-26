@@ -9,17 +9,15 @@
 #
 # delete all comments above this when you use this as your Makefile
 
-TARGETS := apple2 apple2enh
-#TARGETS := atari apple2 apple2enh c64
+TARGETS := atari apple2 apple2enh c64
 #TARGETS := atari apple2 apple2enh c64 c128
 
 PROGRAM := contiki
 
 
 # Set DEBUG to true or false
-DEBUG := true
+DEBUG := false
 export DEBUG
-
 
 
 # where your disk building tools are

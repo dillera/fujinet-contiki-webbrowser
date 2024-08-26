@@ -1,7 +1,6 @@
 ###################################################################
 # Platform Mapping, OS specifics, and Emulator settings
 ###################################################################
-
 ifeq ($(DEBUG),true)
     $(info >Starting os.mk)
 endif
@@ -26,11 +25,6 @@ CURRENT_PLATFORM_cbm610 := c64
 CURRENT_PLATFORM_vic20 := c64
 
 CURRENT_PLATFORM = $(CURRENT_PLATFORM_$(CURRENT_TARGET))
-
-ifeq ($(DEBUG),true)
-    $(info CURRENT_PLATFORM is set to: $(CURRENT_PLATFORM_$(CURRENT_TARGET)))
-endif
-
 
 ifeq '$(findstring ;,$(PATH))' ';'
     detected_OS := Windows

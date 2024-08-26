@@ -32,11 +32,9 @@
 #     VERSION_STRING := $(file < $(VERSION_FILE))
 #     CFLAGS += -DVERSION_STRING=\"$(VERSION_STRING)\"
 
-
 ifeq ($(DEBUG),true)
     $(info >Starting build.mk)
 endif
-
 
 
 # Ensure WSL2 Ubuntu and other linuxes use bash by default instead of /bin/sh, which does not always like the shell commands.
@@ -44,8 +42,7 @@ SHELL := /usr/bin/env bash
 ALL_TASKS =
 DISK_TASKS =
 
-
-# Copy the makefiles folder from the fujinet-build-tools and put it in your project folder
+# try and load some target mappings for all platforms
 -include ./makefiles/os.mk
 
 
@@ -108,6 +105,15 @@ ASFLAGS += --asm-include-dir $(SRCDIR)
 CFLAGS += --include-dir $(SRCDIR)
 
 
+
+ifeq ($(DEBUG),true)
+    $(info ASFLAGS is set to: $(ASFLAGS) )
+    $(info CFLAGS is set to: $(CFLAGS) )
+    $(info ........................... )
+endif
+
+
+
 #
 # load the sub-makefiles
 #
@@ -133,9 +139,6 @@ endif
 # allow for application specific config
 -include ./application.mk
 
-
-# allow for local env specific deployment options
--include ./deployment.mk
 
 
 define _listing_
@@ -194,13 +197,6 @@ SRC_INC_DIRS := \
   $(sort $(dir $(wildcard $(SRCDIR)/common/*))) \
   $(SRCDIR)
 
-
-ifeq ($(DEBUG),true)
-    $(info SRCDIR is set to: $(SRCDIR) )
-endif
-
-
-
 vpath %.c $(SRC_INC_DIRS)
 
 $(OBJDIR)/$(CURRENT_TARGET)/%.o: %.c $(VERSION_FILE) | $(OBJDIR)
@@ -228,11 +224,9 @@ ifeq ($(DEBUG),true)
 endif
 
 
-
-
 test: $(PROGRAM_TGT)
 	$(PREEMUCMD)
-	$(EMUCMD) $(BUILD_DIR)\\$<
+	$(EMUCMD) $(BUILD_DIR)/$<
 	$(POSTEMUCMD)
 
 # Use "./" in front of all dirs being removed as a simple safety guard to

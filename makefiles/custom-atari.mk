@@ -6,10 +6,10 @@ ifeq ($(DEBUG),true)
 endif
 
 # reserved memory for graphics
-#LDFLAGS += -Wl -D,__RESERVED_MEMORY__=0x2000
+# LDFLAGS += -Wl -D,__RESERVED_MEMORY__=0x2000
+
 #LDFLAGS += --start-addr 0x4400
 #LDFLAGS += -C cfg/atari.cfg
-
 
 ################################################################
 # DISK creation

@@ -5,14 +5,12 @@ ifeq ($(DEBUG),true)
     $(info >>>Starting common.mk)
 endif
 
-# Pull in FujiNet-Lib
--include ./makefiles/fujinet-lib.mk
+
+CFLAGS += -D AUTOSTART_ENABLE -W -unused-param
+LDFLAGS += -Wl -D,__HIMEM__=0xBF00
 
 
-#contiki
-CFLAGS += -Oris -D AUTOSTART_ENABLE -W -unused-param
-
-CFLAGS += -Osir
+-include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/fujinet-lib.mk
 
 VERSION_FILE := src/version.txt
 ifeq (,$(wildcard $(VERSION_FILE)))
@@ -22,4 +20,4 @@ else
 	VERSION_STRING := $(file < $(VERSION_FILE))
 endif
 
-
+CFLAGS += -Osir

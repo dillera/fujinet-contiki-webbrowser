@@ -1,19 +1,18 @@
 ###################################################################
 # C64
 ###################################################################
-
-
 ifeq ($(DEBUG),true)
-    $(info >Starting common.mk)
+    $(info >Starting custom-c64.mk)
 endif
 
-
+# COMPILE FLAGS
 
 ################################################################
 # DISK creation
 
 SUFFIX = .prg
 DISK_TASKS += .create-d64
+VICE_HOME := $(dir $(shell which xvic))
 
 DISK_FILE = $(DIST_DIR)/$(PROGRAM).d64
 
